@@ -1,0 +1,93 @@
+---
+title: "p8105_hw1_wq2161"
+author: "Wanxin Qi"
+date: "9/22/2021"
+output: github_document
+---
+
+# Problem 1
+
+## Part 1
+
+Load the necessary packages.
+
+```{r load_packages}
+library(tidyverse)
+```
+
+Set up the data frame.
+
+```{r p1_df_setup}
+set.seed(12)
+
+p1_df =
+  tibble(
+    sample = rnorm(10),
+    gr_than_0 = sample > 0,
+    vec_char = c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j"),
+    vec_fact = factor(c("small", "large", "medium", "large", "large",
+                        "medium", "small", "small", "large", "medium"))
+  )
+
+p1_df
+```
+
+## Part 2
+
+Take the mean of each variable in the data frame.
+
+```{r p1_mean, message = FALSE, warning = FALSE}
+mean(pull(p1_df, sample))
+
+mean(pull(p1_df, gr_than_0))
+
+mean(pull(p1_df, vec_char))
+
+mean(pull(p1_df, vec_fact))
+```
+
+The mean of the sample variable, **sample**, and the logical variable, **gr_than_0**, worked; the mean of the character variable, **vec_char**, and the factor variable, **vec_fact**, didn't work.
+
+## Part 3
+
+Apply the *as.numeric* function to the logical, character, and factor variables.
+
+```{r p1_as_numeric, eval = FALSE}
+as.numeric(pull(p1_df, gr_than_0))
+
+as.numeric(pull(p1_df, vec_char))
+
+as.numeric(pull(p1_df, vec_fact))
+```
+
+For the logical variable, it became FALSE = 0 and TRUE = 1, which explained the output of the mean.
+
+For the character variable, NAs were introduced by coercion, which explained the output of the mean.
+
+For the factor variable, numbers 1, 2, 3 were assigned to each factor. However, the mean in part 2 returned NA.
+
+# Problem 2
+
+## Part 1
+
+Load the **penguins** dataset.
+
+```{r p2_load_dataset}
+data("penguins", package = "palmerpenguins")
+```
+
+`r summary(penguins)`.
+
+The dataset includes `r nrow(penguins)` rows and `r ncol(penguins)` columns.
+
+The mean flipper length is `r mean(penguins$flipper_length_mm, na.rm = TRUE)`.
+
+## Part 2
+
+Make a scatterplot of **flipper_length_mm** vs. **bill_length_mm**; color points using the **specious** variable; export the scatterplot to the project directory using *ggsave*.
+
+```{r p2_scatterplot, warning = FALSE}
+ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species) ) + geom_point()
+ggsave("scatter_plot.pdf", height = 4, width = 6)
+```
+
