@@ -1,2 +1,3 @@
 # p8105_hw1_wq2161
-P8105 Homework 1
+
+This repo is for homework 1 of P8105.
