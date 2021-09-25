@@ -76,11 +76,9 @@ Load the **penguins** dataset.
 data("penguins", package = "palmerpenguins")
 ```
 
-`r summary(penguins)`.
+`r skimr::skim(penguins)`
 
-The dataset includes `r nrow(penguins)` rows and `r ncol(penguins)` columns.
-
-The mean flipper length is `r mean(penguins$flipper_length_mm, na.rm = TRUE)`.
+The dataset includes `r nrow(penguins)` rows and `r ncol(penguins)` columns. The variables are `r names(penguins)`. The mean flipper length is `r mean(penguins$flipper_length_mm, na.rm = TRUE)`.
 
 ## Part 2
 
@@ -88,6 +86,6 @@ Make a scatterplot of **flipper_length_mm** vs. **bill_length_mm**; color points
 
 ```{r p2_scatterplot, warning = FALSE}
 ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species) ) + geom_point()
-ggsave("scatter_plot.pdf", height = 4, width = 6)
+ggsave("p2_scatterplot.pdf", height = 4, width = 6)
 ```
 
