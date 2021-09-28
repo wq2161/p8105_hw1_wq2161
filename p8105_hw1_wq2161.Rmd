@@ -50,7 +50,7 @@ The mean of the sample variable, **sample**, and the logical variable, **gr_than
 
 ## Part 3
 
-Apply the *as.numeric* function to the logical, character, and factor variables.
+Apply the `as.numeric` function to the logical, character, and factor variables.
 
 ```{r p1_as_numeric, eval = FALSE}
 as.numeric(pull(p1_df, gr_than_0))
